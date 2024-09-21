@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Real-Time Plant Monitoring</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+
+<style>
+  
+      
+      /* Unimportant stuff below */
+      
+      table {
+        table-layout: fixed;
+        border-collapse: collapse;
+        inline-size: calc(100% + 1rem);
+        margin-block: 3rem;
+        margin-inline: -.5rem;
+        width: 50%;
+        margin: auto;
+       
+       
+      }
+      @media only screen and (max-width: 600px) {
+        table {
+            width: 100%;
+           
+        }
+       
+      }
+      @media only screen and (min-width: 600px) {
+      
+        .tablebox{
+            margin-top:50px;
+          
+        }
+      }
+      @media only screen and (min-width: 800px) {
+      
+        .tablebox{
+            margin-top:-200px;
+          
+        }
+      }
+   
+      tr {
+        border-block-end: .0625rem dotted;
+      }
+      caption,
+      th,
+      td {
+        padding-block: .75rem;
+        padding-inline: .5rem;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      th,
+      td {
+        text-align: left;
+      }
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+      
+    
+    
+      p {
+        margin-block: 1.5rem;
+        text-align: justify;
+      } 
+      code {
+        color: rebeccapurple;
+        font-size: .825rem;
+      }
+      
+
+</style>    
+
+</head>
+<body class="">
+
+
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ navigation menu ] start -->
+    <nav class="pcoded-navbar theme-horizontal menu-light">
+        <div class="navbar-wrapper container">
+            <div class="navbar-content sidenav-horizontal" id="layout-sidenav">
+                <ul class="nav pcoded-inner-navbar sidenav-inner">
+                    <li class="nav-item pcoded-menu-caption">
+                    	<label>Navigation</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    </li>
+                 
+                
+                
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Forms &amp; table</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="croptable.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Crop Recommendation</span></a>
+                    </li>
+                 
+                    <li class="nav-item pcoded-menu-caption">
+                    	<label>Chart & Maps</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chart.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Chart</span></a>
+                    </li>
+                    
+                    <li class="nav-item pcoded-menu-caption">
+                    	<label>Pages</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="auth-signup.html" target="_blank">Sign up</a></li>
+                            <li><a href="auth-signin.html" target="_blank">Sign in</a></li>
+                        </ul>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark">
+		
+			
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            <a href="#!" class="b-brand">
+                <!-- ========   change your logo hear   ============ -->
+                <img src="assets/images/agr 6cut.png" class="bvn2"/> 
+                <img src="assets/images/logo-icon.png" alt="" class="logo-thumb">
+            </a>
+            <a href="#!" class="mob-toggler">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="#!" class="pop-search"></a>
+                    <div class="search-bar">
+                        <input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </li>
+            
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown">
+                        
+                        <div class="dropdown-menu dropdown-menu-right notification">
+                            <div class="noti-head">
+                                
+                            </div>
+                        
+                            
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="feather icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                                <span>Dcoder</span>
+                                <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                    <i class="feather icon-log-out"></i>
+                                </a>
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                                <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+                                <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+			
+	</header>
+	<!-- [ Header ] end -->
+	
+	
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                          
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            
+            <div class="row">
+                <!-- table card-1 start -->
+                <div class="col-md-12 col-xl-4">
+                
+                    <div class="card flat-card">
+                        <div class="row-table">
+                            <div class="col-sm-6 card-body br">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/nitrogen.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="nitrogen1">10</h5>
+                                        <span >Nitrogen (N)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/phosphorus.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="phosphorus1">100</h5>
+                                        <span>Phosphorus (P)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-table">
+                            <div class="col-sm-6 card-body br">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                            
+                                        <img src="assets/images/potassium.png" alt="" style="height: 45px;">
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="Potassium1">2000 +</h5>
+                                        <span>Potassium (K)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/humidity.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="Humidity1">120</h5>
+                                        <span>Humidity</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- table card-1 end -->
+                <!-- table card-2 start -->
+                <div class="col-md-12 col-xl-4">
+                    
+                    <div class="card flat-card">
+                        <div class="row-table">
+                            <div class="col-sm-6 card-body br">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/temperature.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="Temperature1">1000</h5>
+                                        <span>Temperature</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/moisturizing.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="Moisture1">600</h5>
+                                        <span>Soil Moisture</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-table">
+                            <div class="col-sm-6 card-body br">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/pH.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5 id="pH1">3550</h5>
+                                        <span>pH value</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/images/motion.png" alt="" style="height: 45px;">
+    
+                                    </div>
+                                    <div class="col-sm-8 text-md-center">
+                                        <h5>Detected</h5>
+                                        <span>Motion</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+<!-- 
+--------------------- -->
+
+
+           
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+
+
+    <div id="btnarea">
+<button class="recommendcropbtn"  id="recommendcropbtn">Recommend Crop</button>
+<button class="recommendcropbtn" > <span onclick="cropenvironment()"> Recommend Environment For</span>
+    <select  id="cropnamefromuser" >
+    <option value="Rice" >Rice</option>
+    <option value="Maize">Maize</option>
+    <option value="Chickpea">Chickpea</option>
+    <option value="Kidneybeans">Kidneybeans</option>
+    <option value="Wheat">Wheat</option>
+    <option value="Pigeonpeas">Pigeonpeas</option>
+    <option value="Mothbeans">Mothbeans</option>
+    <option value="Blackgram">Blackgram</option>
+    <option value="Lentil">Lentil</option>
+    <option value="Pomegranate">Pomegranate</option>
+    <option value="Banana">Banana</option>
+    <option value="Mango">Mango</option>
+    <option value="Grapes">Grapes</option>
+    <option value="Watermelon">Watermelon</option>
+    <option value="Muskmelon">Muskmelon</option>
+    <option value="Apple">Apple</option>
+    <option value="Orange">Orange</option>
+    <option value="Papaya">Papaya</option>
+    <option value="Coconut">Coconut</option>
+    <option value="Cotton">Cotton</option>
+    <option value="Jute">Jute</option>
+    <option value="Coffee">Coffee</option>
+  
+
+</select>
+
+    
+</button>
+
+
+</section>
+
+
+
+
+<div class="tablebox" style=" text-transform: uppercase;">
+ 
+    <table id="mytable">
+      <thead>
+        <!-- <tr>
+          <th>Crop</th>
+          <th>Requi</th>
+    
+        </tr> -->
+      </thead>
+      <tbody>
+      
+      </tbody>
+    </table>
+    
+    
+    </div>
+
+ 
+  
+
+
+<script type="module" src="assets/js/firebase.js"></script>
+    <!-- Required Js -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>
+
+
+</body>
+<script>
+
+   
+    function cropenvironment(){
+      var cropnamefromuser=  document.getElementById("cropnamefromuser").value;
+   
+    
+      for (var key in cropjson) {
+          if(cropjson[key].Crop==cropnamefromuser){
+          
+            $('#mytable tbody').empty();
+              
+              $('#mytable').append('<tr id="num"><td>Crop Name</td><td>'+cropjson[key].Crop+'</td></tr>');
+              $('#mytable').append('<tr id="num"><td>Nitrogen (N)</td><td>'+cropjson[key].N+'</td></tr>');
+                $('#mytable').append('<tr id="num"><td>Phosphorous (P)</td><td>'+cropjson[key].P+'</td></tr>');
+    
+                $('#mytable').append('<tr id="num"><td>Potassium (K)</td><td>'+cropjson[key].K+'</td></tr>');
+    
+                $('#mytable').append('<tr id="num"><td>Temperature</td><td>'+cropjson[key].Temp+'</td></tr>');
+    
+                $('#mytable').append('<tr id="num"><td>Humidty</td><td>'+cropjson[key].Humidty+'</td></tr>');
+    
+               $('#mytable').append('<tr id="num"><td>pH</td><td>'+cropjson[key].pH+'</td></tr>');
+               $('#mytable').append('<tr id="num"><td>Rainfall (in cm)</td><td>'+cropjson[key].Rain+'</td></tr>');
+
+         
+
+        }
+    }}
+
+
+
+   var cropjson= [
+  {
+    "Crop": "Rice",
+    "N": "78",
+    "P": "35",
+    "K": "44",
+    "Temp": "26",
+    "Humidty": "84",
+    "pH": "7",
+    "Rain": "183"
+  },
+  {
+    "Crop": "Maize",
+    "N": "64",
+    "P": "35",
+    "K": "23",
+    "Temp": "23",
+    "Humidty": "61",
+    "pH": "5",
+    "Rain": "63"
+  }
+  ,
+  {
+    "Crop": "Chickpea",
+    "N": "25",
+    "P": "78",
+    "K": "76",
+    "Temp": "17",
+    "Humidty": "15",
+    "pH": "7",
+    "Rain": "66"
+  }
+  ,
+  {
+    "Crop": "Kidneybeans",
+    "N": "19",
+    "P": "78",
+    "K": "16",
+    "Temp": "20",
+    "Humidty": "23",
+    "pH": "5",
+    "Rain": "67"
+  }
+  ,
+  {
+    "Crop": "Wheat",
+    "N": "78",
+    "P": "35",
+    "K": "44",
+    "Temp": "26",
+    "Humidty": "84",
+    "pH": "7",
+    "Rain": "183"
+  }
+  ,
+  {
+    "Crop": "Pigeonpeas",
+    "N": "6",
+    "P": "69",
+    "K": "19",
+    "Temp": "26",
+    "Humidty": "41",
+    "pH": "4",
+    "Rain": "94"
+  }
+  ,
+  {
+    "Crop": "Mothbeans",
+    "N": "36",
+    "P": "43",
+    "K": "24",
+    "Temp": "27",
+    "Humidty": "43",
+    "pH": "3",
+    "Rain": "41"
+  }
+  ,
+  {
+    "Crop": "Mungbean",
+    "N": "14",
+    "P": "57",
+    "K": "15",
+    "Temp": "29",
+    "Humidty": "83",
+    "pH": "6",
+    "Rain": "40"
+  }
+  ,
+  {
+    "Crop": "Blackgram",
+    "N": "53",
+    "P": "67",
+    "K": "17",
+    "Temp": "31",
+    "Humidty": "69",
+    "pH": "7",
+    "Rain": "61"
+  }
+  ,
+  {
+    "Crop": "Lentil",
+    "N": "40",
+    "P": "79",
+    "K": "17",
+    "Temp": "21",
+    "Humidty": "63",
+    "pH": "6",
+    "Rain": "38"
+  }
+  ,
+  {
+    "Crop": "Pomegranate",
+    "N": "3",
+    "P": "26",
+    "K": "39",
+    "Temp": "24",
+    "Humidty": "91",
+    "pH": "7",
+    "Rain": "103"
+  }
+  ,
+  {
+    "Crop": "Banana",
+    "N": "92",
+    "P": "72",
+    "K": "45",
+    "Temp": "29",
+    "Humidty": "77",
+    "pH": "5",
+    "Rain": "90"
+  }
+  ,
+  {
+    "Crop": "Mango",
+    "N": "15",
+    "P": "27",
+    "K": "28",
+    "Temp": "33",
+    "Humidty": "46",
+    "pH": "4",
+    "Rain": "90"
+  }
+  ,
+  {
+    "Crop": "Grapes",
+    "N": "4",
+    "P": "136",
+    "K": "204",
+    "Temp": "29",
+    "Humidty": "81",
+    "pH": "5",
+    "Rain": "65"
+  }
+  ,
+  {
+    "Crop": "Watermelon",
+    "N": "83",
+    "P": "25",
+    "K": "53",
+    "Temp": "26",
+    "Humidty": "80",
+    "pH": "6",
+    "Rain": "57"
+  }
+  ,
+  {
+    "Crop": "Muskmelon",
+    "N": "83",
+    "P": "7",
+    "K": "45",
+    "Temp": "29",
+    "Humidty": "90",
+    "pH": "6",
+    "Rain": "25"
+  }
+  ,
+  {
+    "Crop": "Apple",
+    "N": "7",
+    "P": "144",
+    "K": "195",
+    "Temp": "22",
+    "Humidty": "93",
+    "pH": "5",
+    "Rain": "104"
+  }
+  ,
+  {
+    "Crop": "Orange",
+    "N": "31",
+    "P": "8",
+    "K": "7",
+    "Temp": "34",
+    "Humidty": "93",
+    "pH": "7",
+    "Rain": "103"
+  }
+  ,
+  {
+    "Crop": "Papaya",
+    "N": "59",
+    "P": "62",
+    "K": "52",
+    "Temp": "43",
+    "Humidty": "93",
+    "pH": "6",
+    "Rain": "103"
+  }
+  ,
+  {
+    "Crop": "Coconut",
+    "N": "16",
+    "P": "18",
+    "K": "26",
+    "Temp": "28",
+    "Humidty": "91",
+    "pH": "5",
+    "Rain": "145"
+  }
+  ,
+  {
+    "Crop": "Cotton",
+    "N": "131",
+    "P": "35",
+    "K": "18",
+    "Temp": "24",
+    "Humidty": "82",
+    "pH": "7",
+    "Rain": "64"
+  }
+  ,
+  {
+    "Crop": "Jute",
+    "N": "76",
+    "P": "44",
+    "K": "45",
+    "Temp": "25",
+    "Humidty": "84",
+    "pH": "6",
+    "Rain": "168"
+  }
+  ,
+  {
+    "Crop": "Coffee",
+    "N": "81",
+    "P": "34",
+    "K": "30",
+    "Temp": "25",
+    "Humidty": "62",
+    "pH": "6",
+    "Rain": "135"
+  }
+  
+]
+ 
+</script>
+
+</html>
